@@ -5,6 +5,10 @@ workspace:
 pipeline:
   build_interview:
     image: microsoft/aspnetcore-build:2.0
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
     commands:
       - dotnet restore
       - dotnet publish -c Release -o app
+  build_interview_ui:
+    image: node:alpine
