@@ -13,4 +13,5 @@ pipeline:
   build_interview_ui:
     image: node:alpine
     commands:
+      - npm install
       - npm run build --production
