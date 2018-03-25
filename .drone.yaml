@@ -12,3 +12,5 @@ pipeline:
       - dotnet publish -c Release -o app
   build_interview_ui:
     image: node:alpine
+    commands:
+      - npm run build --production
