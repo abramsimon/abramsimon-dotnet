@@ -6,8 +6,6 @@ pipeline:
   build_interview:
     image: microsoft/aspnetcore-build:2.0
     privileged: true
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
     commands:
       - dotnet restore
       - dotnet publish -c Release -o app
