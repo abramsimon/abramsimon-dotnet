@@ -1,4 +1,5 @@
 workspace:
+  base: /src
   path: github.com/abramsimon/abramsimon-dotnet
 
 pipeline:
