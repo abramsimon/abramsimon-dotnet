@@ -17,9 +17,9 @@ pipeline:
       - npm install
       - npm run build --production
 
-  push_containers:
+  push_container_interview:
     image: plugins/gcr
-    repo: abramsimon/abramsimon-dotnet
+    repo: abramsimon/abramsimon-dotnet/interview
     tags: latest
     json_key: >
       {
