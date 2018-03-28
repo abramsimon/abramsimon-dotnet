@@ -9,13 +9,13 @@ pipeline:
     commands:
       - dotnet restore
       - dotnet publish -c Release -o app
-  build_interview_ui:
-    group: build
-    image: node:alpine
-    commands:
-      - cd interview-ui/
-      - npm install
-      - npm run build --production
+  # build_interview_ui:
+  #   group: build
+  #   image: node:alpine
+  #   commands:
+  #     - cd interview-ui/
+  #     - npm install
+  #     - npm run build --production
 
   publish_container_interview:
       image: docker:18.02.0-ce-dind
@@ -25,6 +25,11 @@ pipeline:
         - sleep 5
         - docker ps
         - docker build ./interview
+
+services:
+  docker:
+    image: docker:18.02.0-ce-dind
+    privileged: true
 
   # push_container_interview:
   #   image: plugins/gcr
