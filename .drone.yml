@@ -19,7 +19,8 @@ pipeline:
 
   push_container_interview:
     image: plugins/gcr
-    repo: abramsimon/abramsimon-dotnet/interview
+    repo: abramsimon/abramsimon-dotnet
+    dockerfile: interview/dockerfile
     tags: latest
     json_key: >
       {
