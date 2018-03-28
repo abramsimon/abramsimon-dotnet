@@ -20,6 +20,8 @@ pipeline:
   publish_container_interview:
       image: docker:18.02.0-ce-dind
       commands:
+        - sleep 5
+        - docker ps
         - docker build ./interview
 
   # push_container_interview:
