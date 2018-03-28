@@ -22,8 +22,10 @@ pipeline:
       environment:
         - DOCKER_HOST=tcp://docker:2375
       commands:
-        - docker build ./interview -t grc.io/model-craft-198603/interview-api:latest
+        - sleep 5
+        - docker ps
         - docker login -u _json_key -p "$(cat .gcr_credentials.json)" https://gcr.io
+        - docker build ./interview -t grc.io/model-craft-198603/interview-api:latest
         - docker push grc.io/model-craft-198603/interview-api:latest
 
 services:
