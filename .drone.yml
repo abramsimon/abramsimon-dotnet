@@ -19,6 +19,8 @@ pipeline:
 
   publish_container_interview:
       image: docker:18.02.0-ce-dind
+      environment:
+        - DOCKER_HOST=tcp://docker:2375
       commands:
         - sleep 5
         - docker ps
