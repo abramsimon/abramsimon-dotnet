@@ -1,0 +1,18 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: interview-server
+  labels:
+    io.kompose.service: interview-server
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        io.kompose.service: interview-server
+    spec:
+      containers:
+      - name: interview-ui
+        image: node:alpine
+        ports:
+        - containerPort: 5000
