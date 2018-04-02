@@ -2,7 +2,7 @@
 
 This project is a testing ground for different technologies that I want to better understand.  The best way to exercise
 these technologies is by having a real project that is both fun and open ended.  As such, I have chosen to create a
-not-remotely-intelligent "bot" that can be interviewed in my absence (inspired by [Bipol as a Service](https://bipolasaservice.herokuapp.com/).
+not-remotely-intelligent "bot" that can be interviewed in my absence (inspired by [Bipol as a Service](https://bipolasaservice.herokuapp.com/)).
 
 So far, this project is composed of:
 
