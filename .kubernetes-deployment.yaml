@@ -1,18 +1,23 @@
-apiVersion: apps/v1beta1
+apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: interview-server
+  name: interview-deployment
   labels:
-    io.kompose.service: interview-server
+    app: interview
 spec:
-  replicas: 1
+  replicas: 2
+  selector:
+    matchLabels:
+      app: interview
   template:
     metadata:
       labels:
-        io.kompose.service: interview-server
+        app: interview
     spec:
       containers:
       - name: interview-ui
-        image: node:alpine
+        image: gcr.io/abramsimon-com/interview-ui
         ports:
         - containerPort: 5000
+        tty: true
+        stdin: true

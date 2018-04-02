@@ -1,4 +1,4 @@
-.gcr_credentials
+.gcr_credentials.json
 .vscode/
 */node_modules/
 */obj/
