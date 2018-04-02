@@ -1,5 +1,5 @@
 .gcr_credentials.json
 .vscode/
-*/node_modules/
-*/obj/
-*/bin/
+node_modules/
+obj/
+bin/

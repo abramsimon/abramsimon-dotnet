@@ -1,59 +1,33 @@
 import React, {Component} from 'react';
-import AutoComplete from 'material-ui/AutoComplete'
-import {deepOrange500} from 'material-ui/styles/colors';
+import { connect } from 'react-redux';
+import AutoComplete from 'material-ui/AutoComplete';
 import FlatButton from 'material-ui/FlatButton';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-const styles = {
-  container: {
-    textAlign: 'center',
-    paddingTop: 200,
-  },
+const mapStateToProps = state => {
+	return { suggestedQuestions: state.suggestedQuestions };
 };
 
-const muiTheme = getMuiTheme({
-  palette: {
-    accent1Color: deepOrange500,
-  },
-});
+const styles = {
+	container: {
+		textAlign: 'center',
+		paddingTop: 200,
+	},
+};
 
-class Main extends Component {
-  constructor(props, context) {
-    super(props, context);
+const ConnectedMain = ({suggestedQuestions}) => (
+	<div style={styles.container}>
+		<h1>Abram Simon</h1>
+		<h2>interactive interview</h2>
+		<AutoComplete
+			dataSource={suggestedQuestions}
+		/>
+		<FlatButton
+			label="?"
+			secondary={true}
+		/>
+	</div>
+);
 
-    this.handleTouchTap = this.handleTouchTap.bind(this);
-  }
-
-  handleTouchTap() {
-    // a question was asked
-  }
-
-  render() {
-
-    const questions = [
-      "who are you?",
-      "what is this project?",
-      "what else can i ask?"
-    ]
-
-    return (
-      <MuiThemeProvider muiTheme={muiTheme}>
-        <div style={styles.container}>
-          <h1>Abram Simon</h1>
-          <h2>interactive interview</h2>
-          <AutoComplete
-            dataSource={questions}
-          />
-          <FlatButton
-            label="?"
-            secondary={true}
-            onTouchTap={this.handleTouchTap}
-          />
-        </div>
-      </MuiThemeProvider>
-    );
-  }
-}
+const Main = connect(mapStateToProps)(ConnectedMain);
 
 export default Main;
