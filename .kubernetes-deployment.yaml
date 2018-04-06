@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: interview-ui
-        image: gcr.io/abramsimon-com/interview-ui:2018-04-01-23-19
+        image: gcr.io/abramsimon-com/interview-ui:2018-04-05-23-40
         ports:
         - containerPort: 5000
         tty: true

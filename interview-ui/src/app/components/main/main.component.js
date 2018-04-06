@@ -1,33 +1,37 @@
-import React, {Component} from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import AutoComplete from 'material-ui/AutoComplete';
-import FlatButton from 'material-ui/FlatButton';
+import compose from 'recompose/compose';
+import Grid from 'material-ui/Grid';
+import Paper from 'material-ui/Paper';
+import Input, { InputLabel } from 'material-ui/Input';
+import { FormControl, FormHelperText } from 'material-ui/Form';
+import { withStyles } from 'material-ui/styles';
+
+const styles = theme => {
+	return {
+		paper: {
+			padding: theme.spacing.unit * 2,
+		}
+	};
+};
+
+const Main = ({classes}) => (
+	<Grid item>
+		<Paper className={classes.paper}>
+			<FormControl>
+				<InputLabel>Question:</InputLabel>
+				<Input id="q" />
+				<FormHelperText>Ask any question you want (no guarantees on the quality of the answers).</FormHelperText>
+			</FormControl>
+		</Paper>
+	</Grid>
+);
 
 const mapStateToProps = state => {
 	return { suggestedQuestions: state.suggestedQuestions };
 };
 
-const styles = {
-	container: {
-		textAlign: 'center',
-		paddingTop: 200,
-	},
-};
-
-const ConnectedMain = ({suggestedQuestions}) => (
-	<div style={styles.container}>
-		<h1>Abram Simon</h1>
-		<h2>interactive interview</h2>
-		<AutoComplete
-			dataSource={suggestedQuestions}
-		/>
-		<FlatButton
-			label="?"
-			secondary={true}
-		/>
-	</div>
-);
-
-const Main = connect(mapStateToProps)(ConnectedMain);
-
-export default Main;
+export default compose(
+	withStyles(styles, { name: 'Main' }),
+	connect(mapStateToProps, null)
+)(Main);
