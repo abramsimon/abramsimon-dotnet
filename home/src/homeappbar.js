@@ -6,6 +6,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import Tooltip from '@material-ui/core/Tooltip';
 import { FaLinkedin, FaGithub } from 'react-icons/fa';
 
 const styles = {
@@ -43,12 +44,16 @@ function HomeAppBar(props) {
           <Typography variant="title" color="inherit" className={classes.flex}>
             Abram Simon v37.0
           </Typography>
-          <IconButton color="inherit">
-            <FaLinkedin onClick={handleLinkedInClick} />
-          </IconButton>
-          <IconButton color="inherit">
-            <FaGithub onClick={handleGithubClick} />
-          </IconButton>
+          <Tooltip title="LinkedIn">
+            <IconButton color="inherit">
+              <FaLinkedin onClick={handleLinkedInClick} />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Github">
+            <IconButton color="inherit">
+              <FaGithub onClick={handleGithubClick} />
+            </IconButton>
+          </Tooltip>
         </Toolbar>
       </AppBar>
     </div>
