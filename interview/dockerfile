@@ -1,5 +1,0 @@
-FROM microsoft/aspnetcore
-
-COPY ./app ./app
-
-ENTRYPOINT ["dotnet", "app/interview.dll"]
