@@ -10,6 +10,8 @@ interface ILambdaProvider {
 const defaultLambdaProviders : ILambdaProvider[] = [
   { name: 'javascript', url: 'https://kjc1wy9o2g.execute-api.us-east-1.amazonaws.com/prod/helloWorld-javascript' },
   { name: 'golang', url: 'https://2j7b34vch2.execute-api.us-east-1.amazonaws.com/prod/helloWorld-golang' },
+  { name: 'python', url: 'https://8rrdb6zwrb.execute-api.us-east-1.amazonaws.com/prod/helloWorld-python' },
+  { name: 'dotnet', url: 'https://28k2rs6enb.execute-api.us-east-1.amazonaws.com/prod/helloWorld-dotnet' },
 ];
 
 const LambdaProviderContext = createContext<ILambdaProvider[]>(defaultLambdaProviders);
