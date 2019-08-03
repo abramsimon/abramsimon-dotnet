@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
+import backVideo from './back.mp4';
 import './App.css';
 
 interface ILambdaProvider {
@@ -32,8 +33,14 @@ const App: React.FC = () => {
 
   return (
     <LambdaProviderContext.Provider value={defaultLambdaProviders}>
-      <div className="App">
-        <header className="App-header">
+      <div className="fullscreen-bg">
+        <video className="fullscreen-bg__video" autoPlay muted loop>
+            <source src={backVideo} type="video/mp4" />
+            Your browser does not support the video tag.
+        </video>
+      </div>
+      <div className="app">
+        <div className="app-box">
           <p>
               {greeting}<br />
               <small><i>says {lambdaProvider.name} lambda</i></small>
@@ -43,10 +50,9 @@ const App: React.FC = () => {
               <button key={p.name} onClick={() => setProvider(p)}>{p.name}</button>
             ))}
           </p>
-        </header>
+        </div>
       </div>
     </LambdaProviderContext.Provider>
-    
   );
 }
 
