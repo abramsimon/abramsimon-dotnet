@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
+import { useDebounce } from 'use-debounce';
 import backVideo from './back.mp4';
 import './App.css';
 
@@ -10,7 +11,7 @@ interface ILambdaProvider {
 
 const defaultLambdaProviders : ILambdaProvider[] = [
   { name: 'javascript', url: 'https://kjc1wy9o2g.execute-api.us-east-1.amazonaws.com/prod/helloWorld-javascript' },
-  { name: 'golang', url: 'https://2j7b34vch2.execute-api.us-east-1.amazonaws.com/prod/helloWorld-golang' },
+  { name: 'golang', url: 'https://y9glti1lfj.execute-api.us-east-1.amazonaws.com/prod/eightball-golang' },
   { name: 'python', url: 'https://8rrdb6zwrb.execute-api.us-east-1.amazonaws.com/prod/helloWorld-python' },
   { name: 'dotnet', url: 'https://28k2rs6enb.execute-api.us-east-1.amazonaws.com/prod/helloWorld-dotnet' },
 ];
@@ -20,16 +21,26 @@ const LambdaProviderContext = createContext<ILambdaProvider[]>(defaultLambdaProv
 const App: React.FC = () => {
   const lambdaProviders = useContext(LambdaProviderContext);
   const [lambdaProvider, setProvider] = useState<ILambdaProvider>(defaultLambdaProviders[0]);
-  const [greeting, setGreeting] = useState('hello?');
+  const [isAsking, setIsAsking] = useState(false);
+  const [query, setQuery] = useState("");
+  const [answer, setAnswer] = useState("");
+  const [debouncedQuery] = useDebounce(query, 500);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const result = await axios(lambdaProvider.url);
-      setGreeting(result.data);
-    };
+    if (!debouncedQuery) {
+      setAnswer("");
+      return
+    }
 
-    fetchData();
-  }, [lambdaProvider]);
+    const fetchAnswer = async () => {
+      const result = await axios(lambdaProvider.url);
+      setAnswer(result.data);
+      setIsAsking(false);
+    }
+
+    setIsAsking(true);
+    fetchAnswer();
+  }, [debouncedQuery, lambdaProvider]);
 
   return (
     <LambdaProviderContext.Provider value={defaultLambdaProviders}>
@@ -41,9 +52,15 @@ const App: React.FC = () => {
       </div>
       <div className="app">
         <div className="app-box">
+          <input type="text" className="query" value={query} placeholder="Ask AI-bram a question..." onChange={e => setQuery(e.target.value)} />
           <p>
-              {greeting}<br />
-              <small><i>says {lambdaProvider.name} lambda</i></small>
+              {isAsking && <span>Asking AI-bram your question ...</span>}
+              {!isAsking && answer &&
+                <span>
+                  {answer}<br />
+                  <small><i>says {lambdaProvider.name} lambda</i></small>
+                </span>
+              }
           </p>
           <p>
             {lambdaProviders.map(p => (

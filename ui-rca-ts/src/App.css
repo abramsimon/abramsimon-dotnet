@@ -47,3 +47,15 @@
       display: none;
   }
 }
+
+.query {
+  width: 100%;
+  border: none;
+  box-sizing: border-box;
+  padding: .5em;
+  background-color: rgba(255,255,255,.75);
+  font-size: 1.2em;
+}
+.query:focus {
+  outline: none;
+}
